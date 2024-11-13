@@ -44,15 +44,10 @@ function TodoApp() {
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add a new task"
+          onKeyDown={(e) => e.key === "Enter" && addTodo()}
+          placeholder="type a text and press Enter "
           className="flex-grow p-2 border border-gray-300 rounded-l-md"
         />
-        <button
-          onClick={addTodo}
-          className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
-        >
-          Add
-        </button>
       </div>
 
       <ul>
@@ -60,7 +55,7 @@ function TodoApp() {
           <li key={index} className="mb-2 flex items-center">
             <span
               className={`flex-grow ${
-                todo.completed ? "line-through text-gray-500" : ""
+                todo.completed ? "line-through text-black" : ""
               }`}
             >
               {editIndex === index ? (
@@ -75,12 +70,20 @@ function TodoApp() {
               )}
             </span>
             {editIndex === index ? (
-              <button
-                onClick={() => saveTodo(index)}
-                className="ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
-              >
-                Save
-              </button>
+              <>
+                <button
+                  onClick={() => saveTodo(index)}
+                  className="ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => deleteTodo(index)}
+                  className="ml-2 bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </>
             ) : (
               <>
                 <button
